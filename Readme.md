@@ -2,7 +2,7 @@
 
 A fully client-side regex testing and explanation tool built for developers. Test regular expressions against any string, understand every token in plain English, save patterns across sessions, and export results — all without a backend, authentication, or internet connection after first load.
 
-**Live Demo:** [regexlab.vercel.app](#) — **Documentation:** [regexlab.vercel.app/docs](#)
+**Live Demo:** [regexlab-solez.vercel.app](#) — **Documentation:** [regexlab-solez.vercel.app/docs](#)
 
 ---
 
