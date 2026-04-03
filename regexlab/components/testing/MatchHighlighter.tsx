@@ -1,6 +1,5 @@
 'use client';
 import React, { useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { RegexMatch } from '../../types';
 import { Tooltip } from '../ui/Tooltip';
 import { cn } from '../../lib/utils';
@@ -16,10 +15,6 @@ export function MatchHighlighter({
   matches,
   onMatchClick,
 }: MatchHighlighterProps) {
-  const shouldReduceMotion =
-    typeof window !== 'undefined' &&
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
   const segments = useMemo(() => {
     const result: React.ReactNode[] = [];
     let lastIndex = 0;
@@ -36,7 +31,6 @@ export function MatchHighlighter({
 
       // The matched segment
       const isA = matchIdx % 2 === 0;
-      const animationDelay = Math.min(matchIdx * 0.02, 0.5);
 
       result.push(
         <Tooltip
@@ -60,20 +54,17 @@ export function MatchHighlighter({
             </div>
           }
         >
-          <motion.mark
-            initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.12, delay: shouldReduceMotion ? 0 : animationDelay }}
-            onClick={() => onMatchClick(matchIdx)}
-            className={cn(
-              'cursor-pointer text-text rounded-sm px-[1px]',
-              isA ? 'match-a' : 'match-b'
-            )}
+          <mark
+              onClick={() => onMatchClick(matchIdx)}
+              className={cn(
+                'cursor-pointer text-text rounded-sm animate-in fade-in duration-150',
+                isA ? 'match-a' : 'match-b'
+              )}
             role="button"
             tabIndex={0}
           >
             {m.value || <span className="inline-block w-1 bg-accent/50 h-3 align-middle" />}
-          </motion.mark>
+          </mark>
         </Tooltip>
       );
 
@@ -90,11 +81,11 @@ export function MatchHighlighter({
     }
 
     return result;
-  }, [testString, matches, onMatchClick, shouldReduceMotion]);
+  }, [testString, matches, onMatchClick]);
 
   return (
     <div
-      className="w-full bg-bg2 rounded-lg border border-border p-4 font-mono text-[13px] leading-relaxed text-text whitespace-pre-wrap break-all overflow-y-auto max-h-[400px]"
+      className="w-full bg-bg2 rounded-lg border border-border p-4 font-mono text-[13px] leading-relaxed text-text whitespace-pre-wrap break-words overflow-hidden min-h-[150px]"
       role="region"
       aria-label="Match highlights"
       aria-live="polite"
