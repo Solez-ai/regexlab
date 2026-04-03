@@ -1,4 +1,4 @@
-# RegexLab
+# <img src="./regexlab/public/regex-lab-logo.png" alt="RegexLab Logo" width="40" align="absmiddle" /> RegexLab
 
 A fully client-side regex testing and explanation tool built for developers. Test regular expressions against any string, understand every token in plain English, save patterns across sessions, and export results — all without a backend, authentication, or internet connection after first load.
 
