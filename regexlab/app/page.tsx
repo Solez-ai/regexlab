@@ -91,7 +91,7 @@ export default function Home() {
             <ErrorBanner error={result.error} />
           </section>
 
-          <section className="flex flex-col gap-4 flex-1 min-h-[300px]">
+          <section className="flex flex-col gap-4 flex-1">
             <h2 className="text-sm font-bold uppercase tracking-wider text-muted">Test String</h2>
             <TestTextarea
               value={testString}

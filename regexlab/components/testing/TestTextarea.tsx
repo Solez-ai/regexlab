@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { cn } from '../../lib/utils';
 import { Badge } from '../ui/Badge';
 
@@ -11,6 +11,18 @@ interface TestTextareaProps {
 
 export function TestTextarea({ value, onChange, matchCount }: TestTextareaProps) {
   const [isDragging, setIsDragging] = useState(false);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // Auto-grow textarea
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      const scrollHeight = textareaRef.current.scrollHeight;
+      // Enforce max-height manually if we want it to scroll after a point, 
+      // but standard approach is let it grow to max-height defined in CSS.
+      textareaRef.current.style.height = `${scrollHeight}px`;
+    }
+  }, [value]);
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
@@ -47,10 +59,11 @@ export function TestTextarea({ value, onChange, matchCount }: TestTextareaProps)
       onDragLeave={handleDragLeave}
     >
       <textarea
+        ref={textareaRef}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         spellCheck={false}
-        className="w-full bg-transparent font-mono text-[13px] leading-relaxed text-text resize-none focus:outline-none p-4 min-h-[110px] max-h-[240px]"
+        className="w-full bg-transparent font-mono text-[13px] leading-relaxed text-text resize-none focus:outline-none p-4 min-h-[150px] overflow-hidden whitespace-pre-wrap break-words"
         aria-label="Test string"
         placeholder="Type or drop a text file here to test..."
       />

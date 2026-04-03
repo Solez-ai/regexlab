@@ -85,7 +85,6 @@ export function SavedPatterns({
               onChange={(e) => setLabel(e.target.value)}
               className="bg-bg border border-border rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-accent"
               required
-              autoFocus
             />
             <input
               type="text"

@@ -27,7 +27,8 @@ export function MatchList({ matches, onSelect }: MatchListProps) {
           <button
             key={i}
             onClick={() => onSelect(i)}
-            className="match-a px-2 py-0.5 rounded text-xs font-mono text-text hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-accent transition-opacity whitespace-pre"
+            className="match-a px-2 py-0.5 rounded text-xs font-mono text-text hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-accent transition-opacity whitespace-pre truncate max-w-full"
+            title={m.value}
           >
             {m.value || '<empty>'}
           </button>
